@@ -6,8 +6,10 @@ generated to gather all individual chagelogs in one file.
 
 To use, add a Debian maintainer name or email. An example:
 
-$ ./srcdown.sh eriberto@debian.org
+   $ ./srcdown.sh eriberto@debian.org
 
 or
 
-$ ./srcdown.sh eriberto
+   $ ./srcdown.sh eriberto
+
+This script is not perfect but perfectly usable.
