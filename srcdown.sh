@@ -1,11 +1,14 @@
 #!/bin/bash
 
-# C 2014 Joao Eriberto Mota Filho <eriberto@debian.org>
-# Last-Update: 2014-11-12
+# C 2014-2015 Joao Eriberto Mota Filho <eriberto@debian.org>
+# Last-Update: 2015-08-26
 
 if [ ! "$1" ]; then echo "No data do process. Please, use a Debian maintainer name."; exit 0; fi
 echo 1
 LISTS=$(find /var/lib/apt/lists/ -maxdepth 1 | egrep debian\.'(net|org)' | grep 'Sources$' | sort)
+
+[ ! "$LISTS" ] && { echo -n "No source lists found. Please, add a deb-src line to /etc/apt/sources.list\nand run apt-get update."; exit 0; }
+
 PKGS=$(cat $LISTS | egrep '(Maintainer|Uploaders)' -C 5 | grep -i "$1" -C 5 | grep '^Package:' | cut -d" " -f2 | sort -n)
 
 echo $PKGS | tr ' ' '\n' | cat -n
