@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # C 2014-2015 Joao Eriberto Mota Filho <eriberto@debian.org>
-# Last-Update: 2015-08-26
+# Last-Update: 2015-10-12
 
-if [ ! "$1" ]; then echo "No data do process. Please, use a Debian maintainer name."; exit 0; fi
+if [ ! "$1" ]; then echo "No data to process. Please, use a Debian maintainer name or an e-mail address."; exit 0; fi
 
 LISTS=$(find /var/lib/apt/lists/ -maxdepth 1 | egrep debian\.'(net|org)' | grep 'Sources$' | sort)
 
@@ -11,7 +11,7 @@ LISTS=$(find /var/lib/apt/lists/ -maxdepth 1 | egrep debian\.'(net|org)' | grep 
 
 PKGS=$(cat $LISTS | egrep '(Maintainer|Uploaders)' -C 5 | grep -i "$1" -C 5 | grep '^Package:' | cut -d" " -f2 | sort -n)
 
-echo $PKGS | tr ' ' '\n' | cat -n
+echo $PKGS | tr ' ' '\n' | sort -u | cat -n
 
 echo -e "\nDownload all debian directories? (type yes to download)\n"
 
