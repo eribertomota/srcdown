@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # C 2014-2015 Joao Eriberto Mota Filho <eriberto@debian.org>
+# https://github.com/eribertomota/srcdown
 # Last-Update: 2015-10-12
 
 if [ ! "$1" ]; then echo "No data to process. Please, use a Debian maintainer name or an e-mail address."; exit 0; fi
